@@ -33,4 +33,8 @@ public class Usuario {
 		
 	}
 	
+	@Override
+    public String toString() {
+        return "Nome -> " + this.nome + "\nCPF -> " + this.cpf;
+    }
 }
