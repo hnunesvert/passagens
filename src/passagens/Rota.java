@@ -11,6 +11,16 @@ public class Rota {
 		this.vagas = vagas;
 	}
 	
+	public String getDestino() {
+		return destino;
+	}
+	
+	public Passagem[] getVagas() {
+		return vagas;
+	}
+	
+
+	
 	@Override
     public String toString() {
         return "Destino - " + this.destino + " | Quantidade de Vagas: " + this.vagas.length;

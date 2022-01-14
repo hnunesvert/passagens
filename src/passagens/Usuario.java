@@ -6,6 +6,8 @@ public class Usuario {
 	
 	private static final AtomicInteger count = new AtomicInteger(0);
 	private int idUsuario;
+	private String cpf;
+	private String nome;
 	
 	public String getCpf() {
 		return cpf;
@@ -23,9 +25,6 @@ public class Usuario {
 //		this.nome = nome;
 //	}
 
-	private String cpf;
-	private String nome;
-	
 	public Usuario(String cpf, String nome) {
 		this.cpf = cpf;
 		this.nome = nome;

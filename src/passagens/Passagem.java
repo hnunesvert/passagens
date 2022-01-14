@@ -14,6 +14,14 @@ public class Passagem {
 		
 	}
 	
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
+	@Override
+    public String toString() {
+        return this.idPassagem + " | Valor: R$" + this.valor;
+    }
 }
 
 

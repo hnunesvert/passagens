@@ -1,53 +1,30 @@
 package passagens;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Sistema {
 
+	public static Rota[] rotas = Fabrica.inicializacao();
+	
 	public static void main(String[] args) {
+
 		
-		Rota[] rotas = inicializacao();
 	
 		System.out.println("----------------------------------------");	
 		System.out.println("SISTEMA DE RESERVA DE PASSAGENS DE AVIÃO");
-		
-		Usuario usuarioLogado = acesso(rotas);
-		System.out.println(usuarioLogado);
+		/*
+		Usuario usuarioLogado = acesso();
+		if(usuarioLogado != null) {
+			System.out.println("USUÁRIO \n" + usuarioLogado);
+			painel(usuarioLogado);
+		} */
+		painel(new Usuario("Teste", "12321351"));
 	}
 	
-	public static Rota[] inicializacao() {
 
-		Passagem[] passagensSP = {
-			new Passagem("SP001", 800.0), 
-			new Passagem("SP002", 800.0), 
-			new Passagem("SP003", 800.0), 
-			new Passagem("SP004", 800.0), 
-			new Passagem("SP005", 800.0)
-		};
-		Rota SaoPaulo = new Rota("São Paulo", passagensSP);
-		
-		Passagem[] passagensRJ = {
-			new Passagem("RJ001", 500.0), 
-			new Passagem("RJ002", 500.0), 
-			new Passagem("RJ003", 500.0), 
-			new Passagem("RJ004", 500.0), 
-			new Passagem("RJ005", 500.0)
-		};
-		Rota RioJaneiro = new Rota("Rio de Janeiro", passagensRJ);
-
-		Passagem[] passagensAC = {
-				new Passagem("AC001", 250.0), 
-				new Passagem("AC002", 250.0), 
-				new Passagem("AC003", 250.0), 
-				new Passagem("AC004", 250.0), 
-				new Passagem("AC005", 250.0)
-			};
-		Rota Acre = new Rota("Acre", passagensAC);		
-		
-		Rota[] rotas = {SaoPaulo, RioJaneiro, Acre};
-		return rotas;
-	}
 	
 	
 	/*
@@ -61,46 +38,110 @@ public class Sistema {
 	
 
 	
-	public static Usuario acesso(Rota[] rotas){
-		System.out.println("----------------------------------------");	
-		System.out.println("1 - Cadastrar Usuário");
-		System.out.println("2 - Listar Rotas Disponíveis");
-		System.out.println("0 - Sair");
-		System.out.println("----------------------------------------");	
-		
-		System.out.println("Selecione uma das opções: ");
-		Scanner ler = new Scanner(System.in);
-		int opcao = ler.nextInt();
-		
-		switch (opcao) {
-		case 1:
-			System.out.println("Digite seu Nome: ");
-			Scanner lerNome = new Scanner(System.in);
-			String opcaoNome = lerNome.nextLine();			
+	public static Usuario acesso(){
+		int opcao = 2;
+		do {
+			System.out.println("----------------------------------------");	
+			System.out.println("1 - Cadastrar Usuário");
+			System.out.println("2 - Listar Rotas Disponíveis");
+			System.out.println("0 - Sair");
+			System.out.println("----------------------------------------");	
 			
-			System.out.println("Digite seu CPF: ");
-			Scanner lerCpf = new Scanner(System.in);
-			String opcaoCpf = lerCpf.next();
+			System.out.println("Selecione uma das opções: ");
+			Scanner ler = new Scanner(System.in);
+			opcao = ler.nextInt();
 			
-			Usuario usuario = new Usuario(opcaoCpf, opcaoNome);
-			return usuario;
-		// Listar as rotas disponiveis	
-		case 2:
-			for (Rota rota : rotas) {
-				System.out.println(rota);
-			}
-			
-			acesso(rotas);
-			break;
-		case 0: 
-			System.out.println("Obrigado por usar o sistema!");
-			break; 
-		default:
-			System.out.println("Opção inválida.");
-			acesso(rotas);
-			break;
-		}
+			switch (opcao) {
+			case 1:
+				System.out.println("Digite seu Nome: ");
+				Scanner lerNome = new Scanner(System.in);
+				String opcaoNome = lerNome.nextLine();			
+				
+				System.out.println("Digite seu CPF: ");
+				Scanner lerCpf = new Scanner(System.in);
+				String opcaoCpf = lerCpf.next();
+				
+				Usuario usuario = new Usuario(opcaoCpf, opcaoNome);
+				return usuario;
+
+			// Listar as rotas disponiveis	
+			case 2:
+				for (Rota rota: rotas) {
+					System.out.println(rota);
+				}
+				break;
+			case 0: 
+				System.out.println("Obrigado por usar o sistema!");
+				break; 
+			default:
+				System.out.println("Opção inválida.");
+				break;
+			}	
+		} while(opcao != 0);
 		return null;
 	}
 
+	public static void painel(Usuario usuarioLogado) {
+		int opcao = 2;
+		do {
+			System.out.println("----------------------------------------");	
+			System.out.println("1 - Listar Rotas Disponíveis");
+			System.out.println("2 - Listar passagens reservadas");
+			System.out.println("0 - Sair");
+			System.out.println("----------------------------------------");	
+			
+			System.out.println("Selecione uma das opções: ");
+			Scanner ler = new Scanner(System.in);
+			opcao = ler.nextInt();
+			
+			switch (opcao) {
+			case 1:
+				for (int i = 0; i < rotas.length; i++) {
+					System.out.println(i + 1 + " - " + rotas[i]);
+				}
+				
+				escolherRota(usuarioLogado);
+				break;	
+			case 2:
+				break;
+			case 0: 
+				System.out.println("Obrigado por usar o sistema!");
+				break; 
+			default:
+				System.out.println("Opção inválida.");
+				break;
+			}	
+		} while(opcao != 0);
+	}
+
+	public static void escolherRota(Usuario usuarioLogado) {
+		System.out.println("----------------------------------------");	
+		System.out.println("Escolha uma rota ou aperte 0 para voltar: ");
+		Scanner ler = new Scanner(System.in);
+		int opcao = ler.nextInt();
+		if (testaOpcao(opcao, rotas)) {
+			Rota rotaEscolhida = rotas[opcao - 1];
+			System.out.println(rotaEscolhida.getDestino());
+			
+			for (int i = 0; i < rotaEscolhida.getVagas().length; i++) {
+				System.out.println(i + 1 + " - " + rotaEscolhida.getVagas()[i]);
+			}
+
+			System.out.println("----------------------------------------");	
+			System.out.println("Escolha uma passagem ou aperte 0 para cancelar: ");
+			opcao = ler.nextInt();
+			if (testaOpcao(opcao, rotaEscolhida.getVagas())) {
+				Passagem passagemEscolhida = rotaEscolhida.getVagas()[opcao - 1];
+				passagemEscolhida.setUsuario(usuarioLogado);
+			}
+		} 
+	}
+
+	public static boolean testaOpcao(int opcao, Object[] array) {
+		if(opcao > 0 && (opcao - 1) < array.length) {
+			return true;
+		}
+		System.out.println("Opção inválida.");
+		return false;
+	}
 }
