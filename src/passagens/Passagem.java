@@ -14,6 +14,18 @@ public class Passagem {
 		
 	}
 	
+	public String getIdPassagem() {
+		return this.idPassagem;
+	}
+
+	public double getValor() {
+		return this.valor;
+	}
+
+	public Usuario getUsuario() {
+		return this.usuario;
+	}
+	
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}

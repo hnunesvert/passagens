@@ -1,12 +1,14 @@
 package passagens;
 
+import java.util.ArrayList;
+
 public class Rota {
 	
 	private String destino;
-	private Passagem[] vagas;
-	private Passagem[] reservadas;
+	private ArrayList<Passagem> vagas = new ArrayList<Passagem>();
+	private ArrayList<Passagem> reservadas = new ArrayList<Passagem>();
 	
-	public Rota(String destino, Passagem[] vagas) {
+	public Rota(String destino, ArrayList<Passagem> vagas) {
 		this.destino = destino;
 		this.vagas = vagas;
 	}
@@ -15,15 +17,37 @@ public class Rota {
 		return destino;
 	}
 	
-	public Passagem[] getVagas() {
+	public ArrayList<Passagem> getVagas() {
 		return vagas;
 	}
 	
-
+	public ArrayList<Passagem> getReservadas() {
+		return reservadas;
+	}
 	
+	public void reservarPassagem(Passagem passagem) {
+		this.vagas.remove(passagem);
+		this.reservadas.add(passagem);
+	}
+	
+	public void cancelarPassagem(Passagem passagem) {
+		this.vagas.add(passagem);
+		this.reservadas.remove(passagem);
+	}
+
+	public ArrayList<Passagem> getPassagensUsuario(Usuario usuario) {
+		ArrayList<Passagem> passagensUsuario = new ArrayList<Passagem>();
+		for(Passagem passagem : this.reservadas) {
+			if(passagem.getUsuario().equals(usuario)) {
+				passagensUsuario.add(passagem);
+			}
+		}
+		return passagensUsuario;
+	}
+
 	@Override
     public String toString() {
-        return "Destino - " + this.destino + " | Quantidade de Vagas: " + this.vagas.length;
+        return "Destino - " + this.destino + " | Quantidade de Vagas: " + this.vagas.size();
     }
 	/*
 	 * Metodo:
