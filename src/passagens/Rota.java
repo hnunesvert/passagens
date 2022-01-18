@@ -25,16 +25,25 @@ public class Rota {
 		return reservadas;
 	}
 	
+	/** 
+		Método responsável por tirar a passagem do Array de vagas e adicionar no array de reservadas
+	*/
 	public void reservarPassagem(Passagem passagem) {
 		this.vagas.remove(passagem);
 		this.reservadas.add(passagem);
 	}
 	
+	/** 
+		Método responsável por tirar a passagem do Array de reservadas e adicionar no array de vagas
+	*/
 	public void cancelarPassagem(Passagem passagem) {
 		this.vagas.add(passagem);
 		this.reservadas.remove(passagem);
 	}
 
+	/** 
+		Método responsável por retornar as passagens que são reservadas para o usuário passado 	
+	*/
 	public ArrayList<Passagem> getPassagensUsuario(Usuario usuario) {
 		ArrayList<Passagem> passagensUsuario = new ArrayList<Passagem>();
 		for(Passagem passagem : this.reservadas) {

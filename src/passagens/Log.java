@@ -7,6 +7,10 @@ import java.util.ArrayList;
 public class Log {
     private ArrayList<String> transacoes = new ArrayList<String>();
 
+    /**
+        Método responsável por retornar os logs realizados
+        caso não tenha log, retorna uma mensagem que não possui
+    */
     public String getTransacoes() {
 		String log = "";
         if(this.transacoes.isEmpty()) {
@@ -19,6 +23,10 @@ public class Log {
         return log;
 	}
 
+    /** 
+        Método responsável por adicionar um log novo, 
+        no próprio método é adicionado o dia e a hora
+    */
     public void addTransacao(String transacao) {
         
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  

@@ -2,6 +2,7 @@ package passagens;
 
 public class Usuario {
 	
+	
 	private String cpf;
 	private String nome;
 

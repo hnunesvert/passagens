@@ -4,6 +4,10 @@ import java.util.ArrayList;
 
 public class Fabrica {
 
+	/** 
+	 	Cria as passagens e as insere nas Rotas 
+	*/
+	
 	public static Rota[] inicializacao() {
 
 		ArrayList<Passagem> passagensSP = new ArrayList<Passagem>();
@@ -36,5 +40,7 @@ public class Fabrica {
 		Rota[] rotas = {SaoPaulo, RioJaneiro, Acre};
 		return rotas;
 	}
+	
+	
 	
 }
